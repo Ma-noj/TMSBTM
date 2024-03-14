@@ -92,6 +92,6 @@ public class UserService {
 			responseStructure.setData(user);
 			return new ResponseEntity<>(responseStructure, HttpStatus.OK);
 		}
-		throw new UserNotFoundException("User With the Give Email Not found");
+		throw new UserNotFoundException("User With the Give Detalies Not found");
 	}
 }
