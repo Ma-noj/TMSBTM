@@ -38,4 +38,13 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<>(responseStructure, HttpStatus.BAD_REQUEST);
 	}
+
+	@ExceptionHandler(TaskNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> handleTaskNotFoundException(TaskNotFoundException exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Not Found");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<>(responseStructure, HttpStatus.NOT_FOUND);
+	}
 }
