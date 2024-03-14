@@ -28,4 +28,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(TaskNotAssigiendException.class)
+	public ResponseEntity<ResponseStructure<String>> handleTaskNotAssigiendException(
+			TaskNotAssigiendException exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		responseStructure.setMessage("Not Assgined");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<>(responseStructure, HttpStatus.BAD_REQUEST);
+	}
 }
