@@ -94,4 +94,19 @@ public class UserService {
 		}
 		throw new UserNotFoundException("User With the Give Detalies Not found");
 	}
+
+	public ResponseEntity<ResponseStructure<User>> updateUser(int userId, User user) {
+		Optional<User> optional = userDao.findById(userId);
+		if (optional.isPresent()) {
+			user.setUserId(userId);
+			User modifiedUser = userDao.saveUser(user);
+			ResponseStructure<User> responseStructure = new ResponseStructure<>();
+			responseStructure.setData(modifiedUser);
+			responseStructure.setStatusCode(HttpStatus.OK.value());
+			responseStructure.setMessage("Modified");
+			return new ResponseEntity<>(responseStructure, HttpStatus.OK);
+		}
+		throw new UserNotFoundException("User With the Give UserId" + userId + " Not found");
+	}
+
 }
