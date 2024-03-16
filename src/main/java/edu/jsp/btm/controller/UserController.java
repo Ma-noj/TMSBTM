@@ -36,4 +36,8 @@ public class UserController {
 		}
 		throw new InvalidVserion("Provide A Valid Vsersion");
 	}
+
+	public void findById() {
+
+	}
 }
