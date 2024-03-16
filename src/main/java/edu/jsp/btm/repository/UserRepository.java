@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findUserByUserEmailAndUserPassword(String userEmail, String userPassword);
 
+	@Query("SELECT u FROM User u WHERE u.role = 1?")
+	Optional<User> findUserByRole(Role manager);
+
 }

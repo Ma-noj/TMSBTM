@@ -20,6 +20,28 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
+	public ResponseEntity<ResponseStructure<Object>> saveManager() {
+		Optional<User> optional = userDao.findUserByRole(Role.MANAGER);
+		if (optional.isEmpty()) {
+			User user = new User();
+			user.setUserName("Manager");
+			user.setUserEmail("manager@abc.in");
+			user.setUserPassword("manager@123");
+			user = userDao.saveUser(user);
+			ResponseStructure<Object> responseStructure = new ResponseStructure<>();
+			responseStructure.setMessage("Manager Created");
+			responseStructure.setData(user);
+			responseStructure.setStatusCode(HttpStatus.CREATED.value());
+			return new ResponseEntity<ResponseStructure<Object>>(responseStructure, HttpStatus.CREATED);
+		}
+
+		ResponseStructure<Object> responseStructure = new ResponseStructure<>();
+		responseStructure.setMessage("Manager Exsits");
+		responseStructure.setStatusCode(HttpStatus.OK.value());
+		return new ResponseEntity<ResponseStructure<Object>>(responseStructure, HttpStatus.OK);
+
+	}
+
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user, int managerId) {
 		Optional<User> optional = userDao.findById(managerId);
 		if (optional.isPresent()) {

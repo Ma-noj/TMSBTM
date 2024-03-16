@@ -42,4 +42,8 @@ public class UserDao {
 	public User findByEmailAndPassword(String userEmail, String userPassword) {
 		return userRepository.findUserByUserEmailAndUserPassword(userEmail, userPassword);
 	}
+
+	public Optional<User> findUserByRole(Role manager) {
+		return userRepository.findUserByRole(manager);
+	}
 }

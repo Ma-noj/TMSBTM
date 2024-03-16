@@ -47,4 +47,13 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		responseStructure.setData(exception.getMessage());
 		return new ResponseEntity<>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+
+	private ResponseEntity<ResponseStructure<String>> handelInvalidVserionException(InvalidVserion exception) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setData(exception.getMessage());
+		responseStructure.setMessage("Invalid Vserion");
+		responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<>(responseStructure, HttpStatus.BAD_REQUEST);
+
+	}
 }
